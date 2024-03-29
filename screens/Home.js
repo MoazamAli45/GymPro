@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Image } from "react-native";
+import FitnessCards from "../components/Home/FitnessCards";
 const width = Dimensions.get("window").width;
 
 const Home = () => {
@@ -26,44 +28,74 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.lottie}>
-        <LottieView
-          source={require("../assets/animations/welcome.json")}
-          autoPlay
-          loop
-          style={{ width: "100%", height: "100%" }}
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>HOME WORKOUT</Text>
+        <View style={styles.workoutContainer}>
+          <View style={styles.workouts}>
+            <Text style={styles.workoutNumber}>0</Text>
+            <Text style={styles.workoutText}>WORKOUTS</Text>
+          </View>
+          <View style={styles.workouts}>
+            <Text style={styles.workoutNumber}>0</Text>
+            <Text style={styles.workoutText}>KCAL</Text>
+          </View>
+          <View style={styles.workouts}>
+            <Text style={styles.workoutNumber}>0</Text>
+            <Text style={styles.workoutText}> MINS</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{
+            uri: "https://cdn-images.cure.fit/www-curefit-com/image/upload/c_fill,w_842,ar_1.2,q_auto:eco,dpr_2,f_auto,fl_progressive/image/test/sku-card-widget/gold2.png",
+          }}
+          style={styles.image}
         />
       </View>
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: "bold",
-          marginVertical: 20,
-        }}
-      >
-        Home Screen
-      </Text>
-      <TouchableOpacity
-        onPress={resetHandler}
-        style={{ padding: 20, backgroundColor: "lightblue", borderRadius: 10 }}
-      >
-        <Text>Reset</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+      <FitnessCards />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    width: "100%",
+    height: 200,
+    padding: 10,
+    backgroundColor: "#CD853F",
   },
-  lottie: {
-    width: width * 0.9,
-    height: width,
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  workoutContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 20,
+  },
+  workouts: {
+    alignItems: "center",
+  },
+  workoutNumber: {
+    color: "#fff",
+  },
+  workoutText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: "90%",
+    height: 120,
+    borderRadius: 10,
+    marginTop: -80,
   },
 });
 export default Home;
