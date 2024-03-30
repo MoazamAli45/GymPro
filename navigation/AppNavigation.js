@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "../screens/Home";
 import OnBoarding from "../screens/OnBoarding";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Workout from "../screens/Workout";
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
@@ -14,7 +15,7 @@ const AppNavigation = () => {
     try {
       const value = await AsyncStorage.getItem("onBoarded");
       console.log("onBoardingStatus", value);
-      if (value === 1) {
+      if (value === "1") {
         setShowBoardingScreen(false);
       } else {
         setShowBoardingScreen(true);
@@ -49,6 +50,7 @@ const AppNavigation = () => {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="OnBoarding" component={OnBoarding} />
+          <Stack.Screen name="Workout" component={Workout} />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -64,6 +66,7 @@ const AppNavigation = () => {
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="OnBoarding" component={OnBoarding} />
+        <Stack.Screen name="Workout" component={Workout} />
       </Stack.Navigator>
     </NavigationContainer>
   );

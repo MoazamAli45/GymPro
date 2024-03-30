@@ -13,13 +13,7 @@ export default [
         name: "JUMPING JACKS",
         sets: 12,
       },
-      {
-        id: "11",
-        image:
-          "https://177d01fbswx3jjl1t20gdr8j-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Incline-Push-Up.gif",
-        name: "INCLINE PUSH-UPS",
-        sets: 10,
-      },
+
       {
         id: "12",
         image:
@@ -108,19 +102,7 @@ export default [
         name: "ARM RAISES",
         sets: 8,
       },
-      {
-        id: "71",
-        image: "https://thumbs.gfycat.com/CompleteZigzagFossa-max-1mb.gif",
-        name: "TRICEP DIPS",
-        sets: 10,
-      },
-      {
-        id: "72",
-        image:
-          "https://thumbs.gfycat.com/MisguidedAridAlaskanmalamute-max-1mb.gif",
-        name: "DIAMOND_PUSHUP",
-        sets: 10,
-      },
+
       {
         id: "73",
         image: "https://c.tenor.com/gI-8qCUEko8AAAAC/pushup.gif",
@@ -171,19 +153,7 @@ export default [
         name: "HINDU PUSH-UPS",
         sets: 10,
       },
-      {
-        id: "22",
-        image: "https://thumbs.gfycat.com/TheseRigidBorer-size_restricted.gif",
-        name: "SHOULDER STRETCH",
-        sets: 5,
-      },
-      {
-        id: "23",
-        image:
-          "https://thumbs.gfycat.com/AlertAfraidAldabratortoise-max-1mb.gif",
-        name: "COBRA STRETCH",
-        sets: 4,
-      },
+
       {
         id: "25",
         image:
