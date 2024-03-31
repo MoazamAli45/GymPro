@@ -28,7 +28,11 @@ const Home = () => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{
+        marginTop: 40,
+      }}
+    >
       <View style={styles.container}>
         <Text style={styles.title}>HOME WORKOUT</Text>
         <View style={styles.workoutContainer}>

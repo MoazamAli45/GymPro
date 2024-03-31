@@ -23,7 +23,7 @@ const Workout = () => {
           style={styles.backIcon}
           onPress={() => navigation.goBack()}
         />
-        {item.excersises?.map((exercise, index) => (
+        {item.excersises?.map((exercise) => (
           <Pressable key={exercise.id} style={styles.card}>
             <Image
               source={{ uri: exercise.image }}
@@ -36,7 +36,14 @@ const Workout = () => {
           </Pressable>
         ))}
       </ScrollView>
-      <Pressable style={styles.btn}>
+      <Pressable
+        style={styles.btn}
+        onPress={() =>
+          navigation.navigate("FitScreen", {
+            exercises: item.excersises,
+          })
+        }
+      >
         <Text style={styles.btnText}>Start</Text>
       </Pressable>
     </>
@@ -48,10 +55,11 @@ export default Workout;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
+    marginTop: 40,
   },
   backIcon: {
     position: "absolute",
-    top: 20,
+    top: 40,
     left: 20,
   },
   card: {
