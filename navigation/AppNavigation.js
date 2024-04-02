@@ -70,8 +70,17 @@ const AppNavigation = () => {
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="OnBoarding" component={OnBoarding} />
-        <Stack.Screen name="Workout" component={Workout} />
-        <Stack.Screen name="FitScreen" component={FitScreen} />
+        <Stack.Screen
+          name="Workout"
+          component={Workout}
+          options={{ animation: "fade" }}
+        />
+        <Stack.Screen
+          name="FitScreen"
+          component={FitScreen}
+          options={{ animation: "slide_from_bottom" }}
+        />
+
         <Stack.Screen name="Rest" component={Rest} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -31,7 +31,6 @@ const FitScreen = () => {
   const currentExercise = exercises[currentExerciseIndex];
 
   const handleBackPress = () => {
-    navigation.navigate("Rest");
     setCurrentExerciseIndex((prev) => {
       if (prev === 0) {
         return prev;
@@ -41,16 +40,13 @@ const FitScreen = () => {
   };
 
   const handleSkipPress = () => {
-    navigation.navigate("Rest");
-    setTimeout(() => {
-      setCurrentExerciseIndex((prev) => {
-        if (prev === exercises.length - 1) {
-          navigation.navigate("Home");
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 2000);
+    setCurrentExerciseIndex((prev) => {
+      if (prev === exercises.length - 1) {
+        navigation.navigate("Home");
+        return 0;
+      }
+      return prev + 1;
+    });
   };
   const handleDonePress = () => {
     navigation.navigate("Rest");

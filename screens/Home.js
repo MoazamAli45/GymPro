@@ -43,7 +43,7 @@ const Home = () => {
             <Text style={styles.workoutText}>WORKOUTS</Text>
           </View>
           <View style={styles.workouts}>
-            <Text style={styles.workoutNumber}>{energy}</Text>
+            <Text style={styles.workoutNumber}>{energy.toFixed(2)}</Text>
             <Text style={styles.workoutText}>KCAL</Text>
           </View>
           <View style={styles.workouts}>
