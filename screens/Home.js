@@ -13,10 +13,12 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "react-native";
 import FitnessCards from "../components/Home/FitnessCards";
+import { useExerciseContext } from "../context/ExerciseContext";
 const width = Dimensions.get("window").width;
 
 const Home = () => {
   const navigation = useNavigation();
+  const { energy, time, workouts } = useExerciseContext();
 
   const resetHandler = async () => {
     try {
@@ -37,15 +39,15 @@ const Home = () => {
         <Text style={styles.title}>HOME WORKOUT</Text>
         <View style={styles.workoutContainer}>
           <View style={styles.workouts}>
-            <Text style={styles.workoutNumber}>0</Text>
+            <Text style={styles.workoutNumber}>{workouts}</Text>
             <Text style={styles.workoutText}>WORKOUTS</Text>
           </View>
           <View style={styles.workouts}>
-            <Text style={styles.workoutNumber}>0</Text>
+            <Text style={styles.workoutNumber}>{energy}</Text>
             <Text style={styles.workoutText}>KCAL</Text>
           </View>
           <View style={styles.workouts}>
-            <Text style={styles.workoutNumber}>0</Text>
+            <Text style={styles.workoutNumber}>{time}</Text>
             <Text style={styles.workoutText}> MINS</Text>
           </View>
         </View>

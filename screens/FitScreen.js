@@ -6,16 +6,68 @@ import {
   SafeAreaView,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useExerciseContext } from "../context/ExerciseContext";
 
 const FitScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const {
+    exercisesCompleted,
+    setExercisesCompleted,
+
+    setWorkouts,
+
+    setEnergy,
+
+    setTime,
+  } = useExerciseContext();
+
   const { exercises } = route.params;
   const [currentExerciseIndex, setCurrentExerciseIndex] = React.useState(0);
   const currentExercise = exercises[currentExerciseIndex];
+
+  const handleBackPress = () => {
+    navigation.navigate("Rest");
+    setCurrentExerciseIndex((prev) => {
+      if (prev === 0) {
+        return prev;
+      }
+      return prev - 1;
+    });
+  };
+
+  const handleSkipPress = () => {
+    navigation.navigate("Rest");
+    setTimeout(() => {
+      setCurrentExerciseIndex((prev) => {
+        if (prev === exercises.length - 1) {
+          navigation.navigate("Home");
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 2000);
+  };
+  const handleDonePress = () => {
+    navigation.navigate("Rest");
+    setExercisesCompleted([...exercisesCompleted, currentExercise?.name]);
+    setWorkouts((prev) => prev + 1);
+    setEnergy((prev) => prev + 6.3);
+    setTime((prev) => prev + 3);
+    setTimeout(() => {
+      setCurrentExerciseIndex((prev) => {
+        if (prev === exercises.length - 1) {
+          navigation.navigate("Home");
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 2000);
+  };
   return (
     <SafeAreaView
       style={{
@@ -31,62 +83,23 @@ const FitScreen = () => {
       <MaterialIcons
         name="arrow-back"
         size={30}
-        color="white"
-        style={styles.backIcon}
+        color="black"
         onPress={() => navigation.goBack()}
+        style={styles.backIcon}
       />
       <View style={styles.container}>
         <Text style={styles.title}>{currentExercise.name}</Text>
         <Text style={styles.sets}>x{currentExercise.sets}</Text>
-        <Pressable
-          style={styles.btnDone}
-          onPress={() => {
-            navigation.navigate("Rest");
-            setTimeout(() => {
-              setCurrentExerciseIndex((prev) => {
-                if (prev === exercises.length - 1) {
-                  navigation.navigate("Home");
-                  return 0;
-                }
-                return prev + 1;
-              });
-            }, 2000);
-          }}
-        >
+        <Pressable style={styles.btnDone} onPress={handleDonePress}>
           <Text style={styles.btnText}>Done</Text>
         </Pressable>
         <View style={styles.containerBtn}>
           <Pressable style={styles.btn}>
-            <Text
-              style={styles.btnText}
-              onPress={() => {
-                navigation.navigate("Rest");
-                setCurrentExerciseIndex((prev) => {
-                  if (prev === 0) {
-                    return prev;
-                  }
-                  return prev - 1;
-                });
-              }}
-            >
+            <Text style={styles.btnText} onPress={handleBackPress}>
               Previous
             </Text>
           </Pressable>
-          <Pressable
-            style={styles.btn}
-            onPress={() => {
-              navigation.navigate("Rest");
-              setTimeout(() => {
-                setCurrentExerciseIndex((prev) => {
-                  if (prev === exercises.length - 1) {
-                    navigation.navigate("Home");
-                    return 0;
-                  }
-                  return prev + 1;
-                });
-              }, 2000);
-            }}
-          >
+          <Pressable style={styles.btn} onPress={handleSkipPress}>
             <Text style={styles.btnText}>Skip</Text>
           </Pressable>
         </View>
