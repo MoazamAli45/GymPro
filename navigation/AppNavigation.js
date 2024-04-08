@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Workout from "../screens/Workout";
 import FitScreen from "../screens/FitScreen";
 import Rest from "../screens/Rest";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
@@ -41,32 +42,14 @@ const AppNavigation = () => {
 
   console.log("showBoardingScreen", showBoardingScreen);
 
-  if (showBoardingScreen) {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-          initialRouteName="OnBoarding"
-        >
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="OnBoarding" component={OnBoarding} />
-          <Stack.Screen name="Workout" component={Workout} />
-          <Stack.Screen name="FitScreen" component={FitScreen} />
-          <Stack.Screen name="Rest" component={Rest} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
-
   return (
     <NavigationContainer>
+      <StatusBar style="dark" />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteNarme="Home"
+        initialRouteName={showBoardingScreen ? "OnBoarding" : "Home"}
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="OnBoarding" component={OnBoarding} />

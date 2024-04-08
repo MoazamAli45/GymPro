@@ -63,7 +63,7 @@ export default Workout;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    marginTop: 40,
+    // marginTop: 40,
   },
   backIcon: {
     position: "absolute",

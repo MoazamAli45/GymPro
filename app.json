@@ -19,10 +19,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.moazamali4321.reactnativeexpo"
     },
     "web": {
       "favicon": "./assets/adaptive-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "73dd05d6-40a2-4547-8fe3-100b8961af5a"
+      }
     }
   }
 }

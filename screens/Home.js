@@ -6,9 +6,9 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "react-native";
@@ -28,13 +28,10 @@ const Home = () => {
       console.log(err);
     }
   };
+  const statusBarHeight = StatusBar.currentHeight || 0;
 
   return (
-    <ScrollView
-      style={{
-        marginTop: 40,
-      }}
-    >
+    <ScrollView style={{ statusBarHeight }}>
       <View style={styles.container}>
         <Text style={styles.title}>HOME WORKOUT</Text>
         <View style={styles.workoutContainer}>

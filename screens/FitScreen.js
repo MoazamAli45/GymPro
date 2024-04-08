@@ -66,9 +66,9 @@ const FitScreen = () => {
   };
   return (
     <SafeAreaView
-      style={{
-        marginTop: 40,
-      }}
+    // style={{
+    //   marginTop: 40,
+    // }}
     >
       {currentExercise?.image && (
         <Image
