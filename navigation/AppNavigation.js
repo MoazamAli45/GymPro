@@ -9,10 +9,15 @@ import Workout from "../screens/Workout";
 import FitScreen from "../screens/FitScreen";
 import Rest from "../screens/Rest";
 import { StatusBar } from "expo-status-bar";
+import { useAuth } from "../context/AuthContext";
+import AppStack from "./AppStack";
+import AuthStack from "./AuthStack";
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   const [showBoardingScreen, setShowBoardingScreen] = useState(null);
+  const { currentUser } = useAuth();
+  console.log("currentUser", currentUser);
 
   const getOnBoardingStatus = async () => {
     try {
@@ -45,27 +50,12 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={showBoardingScreen ? "OnBoarding" : "Home"}
-      >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="OnBoarding" component={OnBoarding} />
-        <Stack.Screen
-          name="Workout"
-          component={Workout}
-          options={{ animation: "fade" }}
-        />
-        <Stack.Screen
-          name="FitScreen"
-          component={FitScreen}
-          options={{ animation: "slide_from_bottom" }}
-        />
 
-        <Stack.Screen name="Rest" component={Rest} />
-      </Stack.Navigator>
+      {currentUser ? (
+        <AppStack showBoardingScreen={showBoardingScreen} />
+      ) : (
+        <AuthStack showBoardingScreen={showBoardingScreen} />
+      )}
     </NavigationContainer>
   );
 };

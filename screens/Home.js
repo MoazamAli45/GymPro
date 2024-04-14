@@ -1,39 +1,61 @@
 import {
   View,
   Text,
-  Touchable,
-  TouchableOpacity,
   StyleSheet,
   Dimensions,
   ScrollView,
   StatusBar,
+  Pressable,
 } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import { Image } from "react-native";
 import FitnessCards from "../components/Home/FitnessCards";
 import { useExerciseContext } from "../context/ExerciseContext";
+import { useAuth } from "../context/AuthContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../firbase";
 const width = Dimensions.get("window").width;
 
 const Home = () => {
   const navigation = useNavigation();
   const { energy, time, workouts } = useExerciseContext();
+  const { currentUser, setCurrentUser } = useAuth();
 
-  const resetHandler = async () => {
-    try {
-      await AsyncStorage.removeItem("onBoarded");
-      navigation.navigate("OnBoarding");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  console.log("currentUser", currentUser);
+
   const statusBarHeight = StatusBar.currentHeight || 0;
+
+  const handleLogout = () => {
+    console.log("logout");
+    signOut(auth)
+      .then(async () => {
+        await AsyncStorage.removeItem("user");
+        setCurrentUser(null);
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  };
 
   return (
     <ScrollView style={{ statusBarHeight }}>
       <View style={styles.container}>
-        <Text style={styles.title}>HOME WORKOUT</Text>
+        <View style={styles.topContainer}>
+          <Text style={styles.title}>
+            {currentUser
+              ? `Hello  ${currentUser?.email.split("@")[0]}`
+              : "HOME WORKOUT"}
+          </Text>
+          <Pressable
+            onPress={() => {
+              handleLogout();
+            }}
+          >
+            <Text style={styles.logoutText}>Logout</Text>
+          </Pressable>
+        </View>
         <View style={styles.workoutContainer}>
           <View style={styles.workouts}>
             <Text style={styles.workoutNumber}>{workouts}</Text>
@@ -69,6 +91,18 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#CD853F",
   },
+  topContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: 7,
+  },
+  logoutText: {
+    color: "green",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+
   title: {
     fontSize: 20,
     fontWeight: "bold",
@@ -98,7 +132,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 120,
     borderRadius: 10,
-    marginTop: -80,
+    marginTop: -70,
   },
 });
 export default Home;
