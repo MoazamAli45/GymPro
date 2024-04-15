@@ -26,7 +26,7 @@ const OnBoarding = () => {
   const handleDone = async () => {
     try {
       await AsyncStorage.setItem("onBoarded", "1");
-      navigation.navigate("Home");
+      navigation.navigate("SignUp");
     } catch (err) {
       console.log(err);
     }

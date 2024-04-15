@@ -49,8 +49,7 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar style="dark" />
-
+      <StatusBar style="auto" />
       {currentUser ? (
         <AppStack showBoardingScreen={showBoardingScreen} />
       ) : (

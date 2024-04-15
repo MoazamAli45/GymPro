@@ -1,4 +1,11 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { ScrollView } from "react-native";
@@ -11,9 +18,18 @@ const Workout = () => {
   const navigation = useNavigation();
   const { item } = route.params;
   const { exercisesCompleted } = useExerciseContext();
+
+  const statusBarHeight = StatusBar.currentHeight || 0;
   return (
     <>
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={
+          (styles.container,
+          {
+            marginTop: statusBarHeight,
+          })
+        }
+      >
         <Image
           source={{ uri: item?.image }}
           style={{ width: "100%", height: 250, borderRadius: 5 }}

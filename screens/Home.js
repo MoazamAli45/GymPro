@@ -16,7 +16,6 @@ import { useExerciseContext } from "../context/ExerciseContext";
 import { useAuth } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../firbase";
-const width = Dimensions.get("window").width;
 
 const Home = () => {
   const navigation = useNavigation();
@@ -40,7 +39,11 @@ const Home = () => {
   };
 
   return (
-    <ScrollView style={{ statusBarHeight }}>
+    <ScrollView
+      style={{
+        marginTop: statusBarHeight,
+      }}
+    >
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <Text style={styles.title}>

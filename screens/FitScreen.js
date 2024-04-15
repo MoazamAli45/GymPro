@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   Image,
+  StatusBar,
 } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -64,11 +65,13 @@ const FitScreen = () => {
       });
     }, 2000);
   };
+
+  const statusBarHeight = StatusBar.currentHeight || 0;
   return (
     <SafeAreaView
-    // style={{
-    //   marginTop: 40,
-    // }}
+      style={{
+        marginTop: statusBarHeight,
+      }}
     >
       {currentExercise?.image && (
         <Image
