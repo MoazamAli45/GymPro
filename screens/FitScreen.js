@@ -102,6 +102,12 @@ const FitScreen = () => {
             <Text style={styles.btnText}>Skip</Text>
           </Pressable>
         </View>
+        <Pressable
+          style={[styles.btnDone, styles.btnPose]}
+          onPress={() => navigation.navigate("PoseDetection")}
+        >
+          <Text style={styles.btnText}>Detect Your Pose</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -154,5 +160,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 40,
+  },
+  btnPose: {
+    backgroundColor: "#FF0000",
   },
 });

@@ -1,15 +1,18 @@
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const Rest = () => {
   const navigation = useNavigation();
-  const [timeLeft, setTimeLeft] = React.useState(3);
+  const [timeLeft, setTimeLeft] = useState(3);
+  const [navigateBack, setNavigateBack] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
-        if (prev === 0) {
-          navigation.goBack();
+        if (prev === 1) {
+          setNavigateBack(true); // Set navigateBack to true when time runs out
+          clearInterval(interval); // Stop the interval
         }
         return prev - 1;
       });
@@ -17,6 +20,12 @@ const Rest = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (navigateBack) {
+      navigation.goBack(); // Navigate back once navigateBack is true
+    }
+  }, [navigateBack, navigation]);
 
   return (
     <SafeAreaView>
@@ -54,5 +63,3 @@ const Rest = () => {
 };
 
 export default Rest;
-
-const styles = StyleSheet.create({});

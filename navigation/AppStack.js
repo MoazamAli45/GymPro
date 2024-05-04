@@ -5,6 +5,7 @@ import OnBoarding from "../screens/OnBoarding";
 import Workout from "../screens/Workout";
 import FitScreen from "../screens/FitScreen";
 import Rest from "../screens/Rest";
+import PoseDetection from "../screens/PoseDetection";
 const AppStack = ({ showBoardingScreen }) => {
   const Stack = createNativeStackNavigator();
   return (
@@ -12,10 +13,9 @@ const AppStack = ({ showBoardingScreen }) => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={showBoardingScreen ? "OnBoarding" : "Home"}
+      initialRouteName={"Home"}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen
         name="Workout"
         component={Workout}
@@ -26,7 +26,7 @@ const AppStack = ({ showBoardingScreen }) => {
         component={FitScreen}
         options={{ animation: "slide_from_bottom" }}
       />
-
+      <Stack.Screen name="PoseDetection" component={PoseDetection} />
       <Stack.Screen name="Rest" component={Rest} />
     </Stack.Navigator>
   );

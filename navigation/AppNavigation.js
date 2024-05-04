@@ -23,7 +23,7 @@ const AppNavigation = () => {
     try {
       const value = await AsyncStorage.getItem("onBoarded");
       console.log("onBoardingStatus", value);
-      if (value === "1") {
+      if (value === 1) {
         setShowBoardingScreen(false);
       } else {
         setShowBoardingScreen(true);
